@@ -8,7 +8,7 @@ docker.withRegistry('https://registry.hub.docker.com/', 'dockerhub' ) {
         println commit_id
 
         stage "build"
-        def app = docker.build "mocoso1705/tuiter"
+        def app = docker.build "mocoso/tuiter"
     
         stage "publish"
         app.push 'master'
