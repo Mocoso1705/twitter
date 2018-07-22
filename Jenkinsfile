@@ -1,7 +1,7 @@
 node {
     docker.withRegistry('https://registry.hub.docker.com/', 'dockerhub') {
 
-        git url: "https://github.com/Mocoso1705/twitter", credentialsId: 'github'
+        git url: "", credentialsId: 'github'
 
         sh "git rev-parse HEAD > .git/commit-id"
         def commit_id = readFile('.git/commit-id').trim()
