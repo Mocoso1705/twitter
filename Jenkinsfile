@@ -9,7 +9,7 @@ withDockerRegistry(credentialsId: 'dockerhub') {
         println commit_id
 
         stage "build"
-        def app = docker.build "tuiter"
+        def app = docker.build "mocoso1705/tuiter"
     
         stage "publish"
         app.push 'master'
