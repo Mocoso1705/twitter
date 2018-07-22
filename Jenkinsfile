@@ -13,5 +13,8 @@ docker.withRegistry('https://registry.hub.docker.com/', 'dockerhub' ) {
         stage "publish"
         app.push 'master'
         app.push "${commit_id}"
+        sh '''echo "hello"
+        echo "$commit_id"'''
+
     }
 }
