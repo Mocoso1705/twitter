@@ -1,5 +1,5 @@
 node {
-    docker.withRegistry('https://hub.docker.com/', 'dockerhub') {
+    docker.withRegistry('https://registry.hub.docker.com/', 'dockerhub') {
 
         git url: "https://github.com/Mocoso1705/twitter", credentialsId: 'github'
 
