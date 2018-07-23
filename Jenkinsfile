@@ -14,7 +14,7 @@ docker.withRegistry('https://registry.hub.docker.com/', 'dockerhub' ) {
         app.push 'master'
         app.push "${commit_id}"
         sh '''echo "hello"
-        echo ${lib_arch} '''
+        echo ${commit_id} '''
 
     }
 }
