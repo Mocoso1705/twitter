@@ -17,8 +17,10 @@ docker.withRegistry('https://registry.hub.docker.com/', 'dockerhub' ) {
         stage "deploy"
         sh '''echo "Startig Deployment to Kubernetes"
         COMMIT=$(git rev-parse HEAD)
-        export KUBECONFIG=$KUBECONFIG:~/.kube/kubeconfig-eks
-        kubectl set image deployment/tuiter tuiter=mocoso/tuiter:$COMMIT
+        export KUBECONFIG=~/.kube/kubeconfig-eks
+        echo "$KUBECONFIG"
+        kubectl cluster-info
+        kubectl set image deployment/tuiter-deployment tuiter=mocoso/tuiter:$COMMIT
 
         " '''
 
