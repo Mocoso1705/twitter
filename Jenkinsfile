@@ -16,7 +16,6 @@ docker.withRegistry('https://registry.hub.docker.com/', 'dockerhub' ) {
         println "${commit_id}"
         stage "deploy"
     
-# I know this sucks :)
 
         if (env.PIPELINE_ACTION == 'rollback') {
             sh '''
