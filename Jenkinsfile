@@ -15,24 +15,24 @@ docker.withRegistry('https://registry.hub.docker.com/', 'dockerhub' ) {
         app.push "${commit_id}"
         println "${commit_id}"
         stage "deploy"
-        sh '''
-                APP="tuiter" > enviroment
-                DOCKERUSR="mocoso" >> enviroment
-                APP_DEPLOYMENT="deployment/$APP-deployment" >> enviroment
-                export KUBECONFIG=~/.kube/kubeconfig-eks >> enviroment
-                COMMIT=$(git rev-parse HEAD) >> enviroment
-             '''
     
+# I know this sucks :)
 
         if (env.PIPELINE_ACTION == 'rollback') {
             sh '''
-               . ./enviroment
-               echo "Starting rollback" 
+              APP="tuiter"
+              APP_DEPLOYMENT="deployment/$APP-deployment 
+              export KUBECONFIG=~/.kube/kubeconfig-eks >> enviroment
+              echo "Starting rollback" 
               kubectl rollout undo $APP_DEPLOYMENT
              '''
         } else {
         sh '''
-        . ./enviroment
+        export KUBECONFIG=~/.kube/kubeconfig-eks >> enviroment
+        APP="tuiter"
+        APP_DEPLOYMENT="deployment/$APP-deployment
+        DOCKERUSR="mocoso" 
+        COMMIT=$(git rev-parse HEAD) 
         echo "Startig Deployment to Kubernetes"
         kubectl set image $APP_DEPLOYMENT $APP=$DOCKERUSR/$APP:$COMMIT            
         '''
