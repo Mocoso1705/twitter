@@ -21,7 +21,7 @@ docker.withRegistry('https://registry.hub.docker.com/', 'dockerhub' ) {
             sh '''
               APP="tuiter"
               APP_DEPLOYMENT="deployment/$APP-deployment 
-              export KUBECONFIG=~/.kube/kubeconfig-eks >> enviroment
+              export KUBECONFIG=~/.kube/kubeconfig-eks 
               echo "Starting rollback" 
               kubectl rollout undo $APP_DEPLOYMENT
              '''
@@ -29,7 +29,7 @@ docker.withRegistry('https://registry.hub.docker.com/', 'dockerhub' ) {
         sh '''
         export KUBECONFIG=~/.kube/kubeconfig-eks >> enviroment
         APP="tuiter"
-        APP_DEPLOYMENT="deployment/$APP-deployment
+        APP_DEPLOYMENT="deployment/$APP-deployment"
         DOCKERUSR="mocoso" 
         COMMIT=$(git rev-parse HEAD) 
         echo "Startig Deployment to Kubernetes"
