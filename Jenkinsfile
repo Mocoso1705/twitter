@@ -20,7 +20,7 @@ docker.withRegistry('https://registry.hub.docker.com/', 'dockerhub' ) {
         if (env.PIPELINE_ACTION == 'rollback') {
             sh '''
               APP="tuiter"
-              APP_DEPLOYMENT="deployment/$APP-deployment 
+              APP_DEPLOYMENT="deployment/$APP-deployment"
               export KUBECONFIG=~/.kube/kubeconfig-eks 
               echo "Starting rollback" 
               kubectl rollout undo $APP_DEPLOYMENT
@@ -32,7 +32,9 @@ docker.withRegistry('https://registry.hub.docker.com/', 'dockerhub' ) {
         APP_DEPLOYMENT="deployment/$APP-deployment"
         DOCKERUSR="mocoso" 
         COMMIT=$(git rev-parse HEAD) 
-        echo "Startig Deployment to Kubernetes"
+        USER_COMMIT=$(git log -1 --pretty=format:'%an')
+
+        echo "Startig Deployment to Kubernetes after commit by user $USER_COMMIT"
         kubectl set image $APP_DEPLOYMENT $APP=$DOCKERUSR/$APP:$COMMIT            
         '''
         }
