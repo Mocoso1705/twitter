@@ -21,13 +21,12 @@ docker.withRegistry('https://registry.hub.docker.com/', 'dockerhub' ) {
         APP_DEPLOYMENT="deployment/$APP-deployment"
         export KUBECONFIG=~/.kube/kubeconfig-eks
         COMMIT=$(git rev-parse HEAD)
+       if [[ "$PIPELINE_ACTION" == 'rollback' ]]; then
 
-        if [$PIPELINE_ACTION="rollback" ]; then
         kubectl rollout undo $APP_DEPLOYMENT 
         else
         echo "Startig Deployment to Kubernetes"
         kubectl set image $APP_DEPLOYMENT $APP=$DOCKERUSR/$APP:$COMMIT
-	env
 fi
          '''
 
