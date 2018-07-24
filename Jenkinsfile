@@ -16,6 +16,7 @@ docker.withRegistry('https://registry.hub.docker.com/', 'dockerhub' ) {
         println "${commit_id}"
         stage "deploy"
         sh '''
+        #!/bin/bash
         APP="tuiter"
         DOCKERUSR="mocoso"
         APP_DEPLOYMENT="deployment/$APP-deployment"
