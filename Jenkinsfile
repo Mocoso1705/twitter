@@ -26,13 +26,13 @@ docker.withRegistry('https://registry.hub.docker.com/', 'dockerhub' ) {
 
         if (env.PIPELINE_ACTION == 'rollback') {
             sh '''
-               . enviroment
+               . ./enviroment
                echo "Starting rollback" 
               kubectl rollout undo $APP_DEPLOYMENT
              '''
         } else {
         sh '''
-        . enviroment
+        . ./enviroment
         echo "Startig Deployment to Kubernetes"
         kubectl set image $APP_DEPLOYMENT $APP=$DOCKERUSR/$APP:$COMMIT            
         '''
